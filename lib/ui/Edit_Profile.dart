@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:prefecthabittracer/models/user.dart';
-import 'package:prefecthabittracer/shared/Imagepicker.dart';
 import 'package:prefecthabittracer/shared/loading.dart';
+import 'package:prefecthabittracer/shared/profileUpload.dart';
 import 'package:provider/provider.dart';
 import 'package:velocity_x/velocity_x.dart';
 import 'package:prefecthabittracer/services/Database.dart';
@@ -36,32 +36,6 @@ class EditProfile extends StatelessWidget {
                                   ),
                                   child: Column(
                                     children: [
-                                      FormClass(
-                                        title: 'Weight',
-                                        hint: data['Weight'],
-                                      ),
-                                      Divider(
-                                        color: Colors.grey,
-                                        thickness: 2,
-                                      ),
-                                      10.heightBox,
-                                      FormClass(
-                                        title: 'Age',
-                                        hint: data['Age'].toString(),
-                                      ),
-                                      Divider(
-                                        color: Colors.grey,
-                                        thickness: 2,
-                                      ),
-                                      10.heightBox,
-                                      FormClass(
-                                        title: 'Height',
-                                        hint: data['Height'],
-                                      ),
-                                      Divider(
-                                        color: Colors.grey,
-                                        thickness: 2,
-                                      ),
                                       10.heightBox,
                                       FormClass(
                                         title: 'Gender',
@@ -104,41 +78,58 @@ class EditProfile extends StatelessWidget {
       width: context.screenWidth,
       child: Column(mainAxisAlignment: MainAxisAlignment.start, children: [
         40.heightBox,
-        Center(
-          child: GestureDetector(
-            onTap: () async {
-              Navigator.push(
-                  context, MaterialPageRoute(builder: (ctx) => ImagePickers()));
-            },
-            child: Container(
-              height: 90,
-              width: 90,
-              padding: EdgeInsets.all(2),
-              decoration: BoxDecoration(
+        Container(
+          child: Stack(
+            children: [
+              Container(
+                height: 100,
+                width: 100,
+                padding: EdgeInsets.all(1),
+                decoration: BoxDecoration(
                   color: Colors.white,
                   shape: BoxShape.circle,
-                  image: DecorationImage(
-                      colorFilter: new ColorFilter.mode(
-                          Colors.black.withOpacity(0.7), BlendMode.dstATop),
-                      fit: BoxFit.cover,
-                      image: NetworkImage(
-                        data["profilePic"],
-                      ))),
-              child: Text('Edit').text.xl2.bold.gray800.makeCentered(),
-            ),
+                ),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.all(Radius.circular(100)),
+                  child: Image.network(data["profilePic"], fit: BoxFit.cover,
+                      loadingBuilder: (BuildContext context, Widget child,
+                          ImageChunkEvent loadingProgress) {
+                    if (loadingProgress == null) return child;
+                    return Center(
+                      child: CircularProgressIndicator(
+                        valueColor:
+                            new AlwaysStoppedAnimation<Color>(Colors.red),
+                        value: loadingProgress.expectedTotalBytes != null
+                            ? loadingProgress.cumulativeBytesLoaded /
+                                loadingProgress.expectedTotalBytes
+                            : null,
+                      ),
+                    );
+                  }),
+                ),
+              ).px16().py8().py24(),
+              Positioned(
+                  bottom: 30,
+                  right: 10,
+                  child: GestureDetector(
+                    onTap: () async {
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (ctx) => UploadProfile()));
+                    },
+                    child: 'edit'
+                        .text
+                        .white
+                        .make()
+                        .box
+                        .black
+                        .roundedLg
+                        .padding(
+                            EdgeInsets.symmetric(vertical: 5, horizontal: 10))
+                        .make(),
+                  ))
+            ],
           ),
         ),
-        Container(
-          margin: EdgeInsets.only(bottom: 8),
-          child: "${data['first name']} ${data['last name']}"
-              .text
-              .white
-              .capitalize
-              .bold
-              .xl2
-              .make()
-              .px12(),
-        ).py2(),
         Container(
           margin: EdgeInsets.only(bottom: 8),
           child: Text(data['name']).text.white.bold.xl.make().px12(),
