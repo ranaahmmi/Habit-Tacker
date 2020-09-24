@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "198538657921",
+    "firebase_url": "https://habit-tracker-pro.firebaseio.com",
+    "project_id": "habit-tracker-pro",
+    "storage_bucket": "habit-tracker-pro.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:198538657921:android:712c03ee1ac55a4ca20d80",
+        "android_client_info": {
+          "package_name": "com.ranaahmmi.prefecthabittracer"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "198538657921-ro27mqu6fk8gmrlnj74uq99qrpdoghuv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDDv97x0DpSaoiLHGLFSVUcB6W9asfONJM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "198538657921-ro27mqu6fk8gmrlnj74uq99qrpdoghuv.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "198538657921-i2j997luookngc1bu0k3v1dchbmn2phk.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.ranaahmmi.prefecthabittracer"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
